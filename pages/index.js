@@ -17,7 +17,7 @@ export default function Home({ countries }) {
 export async function getStaticProps() {
   let countries = [];
   try {
-    const response = await axios.get("https://restcountries.com/v2/all");
+    const response = await axios.get("https://restcountries.com/v3.1/all");
     countries = await response?.data;
   } catch (error) {
     console.log(error);

@@ -8,6 +8,7 @@ import {
   getSearchedCountries,
 } from "../api";
 import Filters from "./Filters";
+import Link from "next/link";
 
 const dropDownOptions = [
   { value: "africa", label: "Africa" },
@@ -19,7 +20,6 @@ const dropDownOptions = [
 
 function Countries({ countries: _countries }) {
   const router = useRouter();
-
   const [countries, setCountries] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [search, setSearch] = useState(null);
@@ -104,17 +104,18 @@ function Countries({ countries: _countries }) {
           <div>{error.message}</div>
         ) : (
           countries?.map((country) => {
-            const { name, population, region, capital, flag, numericCode } =
+            const { name, population, region, capital, flags, latlng } =
               country;
             return (
-              <Card
-                key={numericCode}
-                name={name}
-                population={population}
-                region={region}
-                capital={capital}
-                flag={flag}
-              />
+              <Link key={`${latlng[0] - latlng[1]}`} href={`/${name.official}`}>
+                <Card
+                  name={name.official}
+                  population={population}
+                  region={region}
+                  capital={capital}
+                  flag={flags.png}
+                />
+              </Link>
             );
           })
         )}

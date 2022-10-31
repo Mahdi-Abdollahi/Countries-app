@@ -7,7 +7,6 @@ export const DARK = "dark";
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState(DARK);
   const toggleTheme = () => {
-    console.log("hi");
     setTheme((currentValue) => (currentValue === LIGHT ? DARK : LIGHT));
   };
   return (
