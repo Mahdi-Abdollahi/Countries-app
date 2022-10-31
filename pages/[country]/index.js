@@ -53,5 +53,5 @@ export async function getStaticPaths() {
       params: { country: country.name.official.toString() },
     };
   });
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
