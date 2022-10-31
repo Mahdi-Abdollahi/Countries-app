@@ -4,21 +4,43 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import SearchInput from "./SearchInput";
 import { useRouter } from "next/router";
-import { getAllCountries, getSearchedCountries } from "../api";
+import {
+  getAllCountries,
+  getCountriesByRegion,
+  getSearchedCountries,
+} from "../api";
+import Filters from "./Filters";
+
+const dropDownOptions = [
+  { value: "africa", label: "Africa" },
+  { value: "americas", label: "Americas" },
+  { value: "asia", label: "Asia" },
+  { value: "europe", label: "Europe" },
+  { value: "oceania", label: "Oceania" },
+];
 
 function Countries({ countries: _countries }) {
   const [countries, setCountries] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [search, setSearch] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(null);
   const [error, setError] = useState(null);
-  const searchInputHandler = (event) => setSearch(event.target.value);
   const router = useRouter();
+
+  const searchInputHandler = (event) => setSearch(event.target.value);
+
+  const selectDropDownMenuHandler = (_selectedRegion) => {
+    if (_selectedRegion) {
+      setSelectedRegion(_selectedRegion.value);
+    } else {
+      setSelectedRegion(null);
+    }
+  };
 
   useEffect(() => {
     setCountries(_countries);
   }, [_countries]);
 
-  console.log("search: ", search);
   useEffect(() => {
     if (search?.length) {
       setError(null);
@@ -43,11 +65,39 @@ function Countries({ countries: _countries }) {
     }
   }, [search]);
 
+  useEffect(() => {
+    if (selectedRegion?.length) {
+      setError(null);
+      setLoading(true);
+
+      getCountriesByRegion(selectedRegion)
+        .then((res) => {
+          setCountries(res);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setLoading(false);
+        });
+    } else {
+      setLoading(true);
+      setError(null);
+      getAllCountries().then((res) => {
+        setCountries(res);
+        setLoading(false);
+      });
+    }
+  }, [selectedRegion]);
+
   return (
     <>
-      <section>
-        <SearchInput onSearch={searchInputHandler} searchedValue={search} />
-      </section>
+      <Filters
+        onSearch={searchInputHandler}
+        searchedValue={search}
+        dropDownOptions={dropDownOptions}
+        onSelect={selectDropDownMenuHandler}
+        selectedOption={selectedRegion}
+      />
       <main className={styles.container}>
         {isLoading ? (
           <div>Loading...</div>
