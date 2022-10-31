@@ -1,13 +1,13 @@
-import styles from "../styles/Header.module.css";
-
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
 import ThemeButton from "./ThemeButton";
-
-function Header() {
+function Header({}) {
+  const { theme, toggleTheme } = useContext(ThemeColorContext);
+  console.log(theme);
   return (
-    <header className={styles.header}>
-      <h1 className={styles.title}>Where in the world?</h1>
-      <ThemeButton />
+    <header className="header">
+      <h1 className="title">Where in the world?</h1>
+      <ThemeButton onThemeChange={toggleTheme} theme={theme} />
     </header>
   );
 }

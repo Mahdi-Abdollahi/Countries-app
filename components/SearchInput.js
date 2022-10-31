@@ -1,12 +1,10 @@
-import styles from "../styles/Search.module.css";
-
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 const SearchInput = ({ onSearch, searchedValue }) => {
   return (
     <div>
       <input
-        className={styles.search_input}
+        className="search_input"
         type="search"
         name="search"
         id="search"

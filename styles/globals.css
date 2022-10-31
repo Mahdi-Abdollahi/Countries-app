@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 
+:root {
+  --background: hsl(0, 0%, 98%);
+  --text: hsl(200, 15%, 8%);
+  --el-background: hsl(0, 0%, 100%);
+}
+[data-theme="dark"] {
+  --background: hsl(207, 26%, 17%);
+  --text: hsl(0, 0%, 100%);
+  --el-background: hsl(209, 23%, 22%);
+}
+
 html,
 body {
   padding: 0;
@@ -16,15 +27,119 @@ a {
 * {
   box-sizing: border-box;
   font-family: "Nunito Sans", sans-serif;
-  color: hsl(200, 15%, 8%);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.header {
+  background-color: var(--el-background);
+  -webkit-box-shadow: 0px 0px 3px 0px #d7d7d7;
+  box-shadow: 0px 0px 3px 0px #d7d7d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+  height: 80px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text);
+}
+
+@media (min-width: 720px) {
+  .header {
+    padding: 0 54px;
   }
-  body {
-    color: white;
-    background: hsl(0, 0%, 98%);
+  .title {
+    font-size: 24px;
   }
+}
+
+.theme_btn {
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  color: var(--text);
+}
+.btn_icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+@media (min-width: 720px) {
+  .theme_btn {
+    font-size: 16px;
+  }
+  .btn_icon {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+}
+
+.container {
+  padding: 20px;
+  background-color: var(--background);
+}
+@media (min-width: 720px) {
+  .container {
+    padding: 20px 54px;
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  /* padding: 20px; */
+}
+
+@media (min-width: 640px) {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .main {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  width: 100%;
+  height: 400px;
+  background-color: var(--el-background);
+  color: var(--text);
+  border-radius: 5px;
+  overflow: hidden;
+  /* -webkit-box-shadow: 0px 0px 2px 1px #414141;
+  box-shadow: 0px 0px 2px 1px #dbdbdb; */
+}
+.card__image_container {
+  width: 100%;
+  height: 50%;
+}
+.card__image {
+  max-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.card__title {
+}
+
+.search_input {
+  width: 200px;
+  background-color: #fff;
+  color: hsl(200, 15%, 8%);
 }

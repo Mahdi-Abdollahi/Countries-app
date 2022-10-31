@@ -1,5 +1,3 @@
-import styles from "../styles/Countries.module.css";
-
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import SearchInput from "./SearchInput";
@@ -20,12 +18,13 @@ const dropDownOptions = [
 ];
 
 function Countries({ countries: _countries }) {
+  const router = useRouter();
+
   const [countries, setCountries] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [search, setSearch] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [error, setError] = useState(null);
-  const router = useRouter();
 
   const searchInputHandler = (event) => setSearch(event.target.value);
 
@@ -90,7 +89,7 @@ function Countries({ countries: _countries }) {
   }, [selectedRegion]);
 
   return (
-    <>
+    <div className="container">
       <Filters
         onSearch={searchInputHandler}
         searchedValue={search}
@@ -98,7 +97,7 @@ function Countries({ countries: _countries }) {
         onSelect={selectDropDownMenuHandler}
         selectedOption={selectedRegion}
       />
-      <main className={styles.container}>
+      <main className="main">
         {isLoading ? (
           <div>Loading...</div>
         ) : error ? (
@@ -120,7 +119,7 @@ function Countries({ countries: _countries }) {
           })
         )}
       </main>
-    </>
+    </div>
   );
 }
 

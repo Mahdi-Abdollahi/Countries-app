@@ -1,14 +1,12 @@
-import styles from "../styles/Card.module.css";
-
 import React from "react";
 
 function Card({ name, flag, population, region, capital }) {
   return (
-    <div className={styles.card}>
-      <div className={styles.card__image_container}>
-        <img className={styles.card__image} src={flag} alt={name} />
+    <div className="card">
+      <div className="card__image_container">
+        <img className="card__image" src={flag} alt={name} />
       </div>
-      <h5 className={styles.card__title}>{name}</h5>
+      <h5 className="card__title">{name}</h5>
       <div>
         Population: <span>{population}</span>
       </div>

@@ -1,12 +1,16 @@
-import styles from "../styles/ThemeButton.module.css";
-
 import React from "react";
 import { HiOutlineMoon } from "react-icons/hi";
-function ThemeButton() {
+import { HiMoon } from "react-icons/hi";
+import { DARK } from "../pages/_app";
+function ThemeButton({ onThemeChange, theme }) {
   return (
-    <button className={styles.theme_btn}>
-      <HiOutlineMoon className={styles.btn_icon} />
-      Dark Mode
+    <button onClick={onThemeChange} className="theme_btn">
+      {theme === DARK ? (
+        <HiMoon className="btn_icon" />
+      ) : (
+        <HiOutlineMoon className="btn_icon" />
+      )}
+      {theme} Mode
     </button>
   );
 }

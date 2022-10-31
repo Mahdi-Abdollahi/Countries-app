@@ -1,10 +1,9 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import axios from "axios";
 import Countries from "../components/Countries";
 export default function Home({ countries }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Countries Challenge</title>
         <meta name="description" content="Chanllege of Alibaba company" />
